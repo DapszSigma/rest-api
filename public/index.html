@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dapsz REST API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: #e5e7eb;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      margin-bottom: 8px;
+    }
+
+    header p {
+      opacity: 0.6;
+    }
+
+    .card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .endpoint {
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 15px;
+      background: #020617;
+    }
+
+    .endpoint-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .method {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .get {
+      background: #052e16;
+      color: #22c55e;
+    }
+
+    code {
+      color: #38bdf8;
+      flex: 1;
+      word-break: break-all;
+    }
+
+    button {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #334155;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    button:hover {
+      background: #0f172a;
+    }
+
+    pre {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    .muted {
+      opacity: 0.7;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      opacity: 0.4;
+      margin-top: 40px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>⚡ Dapsz REST API</h1>
+    <p>Simple • Fast • Developer Friendly</p>
+  </header>
+
+  <!-- IP CARD -->
+  <div class="card">
+    <h2>🌐 Your IP</h2>
+    <code id="ip">Detecting...</code>
+  </div>
+
+  <!-- ENDPOINT LIST -->
+  <div class="card">
+    <h2>📡 Available Endpoints</h2>
+
+    <!-- TikTok -->
+    <div class="endpoint">
+      <div class="endpoint-header">
+        <span class="method get">GET</span>
+        <code>/api/tiktok?url=</code>
+        <button onclick="copy('/api/tiktok?url=')">Copy</button>
+      </div>
+      <p class="muted">Download TikTok video metadata & direct video link</p>
+      <pre>GET /api/tiktok?url=https://www.tiktok.com/@user/video/12345</pre>
+    </div>
+    
+  </div>
+
+  <footer>
+    © Dapsz REST API • Built for developers
+  </footer>
+
+</div>
+
+<script>
+  // Detect IP
+  fetch("https://api.ipify.org?format=json")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("ip").innerText = data.ip;
+    })
+    .catch(() => {
+      document.getElementById("ip").innerText = "Unavailable";
+    });
+
+  // Copy endpoint
+  function copy(text) {
+    navigator.clipboard.writeText(text);
+    alert("Endpoint copied!");
+  }
+</script>
+
+</body>
+</html>
